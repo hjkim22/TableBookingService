@@ -9,15 +9,16 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+// JPA에서 사용되는 공통 필드 정의 상위 클래스
+
 @Getter
-// 직접 테이블과 매핑시키지 않고, 상속받는 하위 클래스들이 이 클래스 필드를 상속받아서 해당 필드를 자신의 테이블과 매핑
-@MappedSuperclass
+@MappedSuperclass // 하위 클래스 테이블 매핑
 @EntityListeners(AuditingEntityListener.class) // JPA 엔티티 리스너 설정
 public class GlobalEntity {
 
-    @CreatedDate
+    @CreatedDate // 생성일 자동 설정
     private LocalDateTime createdAt;
 
-    @LastModifiedDate
+    @LastModifiedDate // 수정일 자동 설정
     private LocalDateTime updatedAt;
 }

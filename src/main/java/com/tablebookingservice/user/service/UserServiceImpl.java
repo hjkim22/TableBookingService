@@ -1,7 +1,7 @@
 package com.tablebookingservice.user.service;
 
 import com.tablebookingservice.auth.type.MemberType;
-import com.tablebookingservice.global.exception.MemberException;
+import com.tablebookingservice.global.exception.CustomException;
 import com.tablebookingservice.global.type.ErrorCode;
 import com.tablebookingservice.user.dto.RegisterUserDto;
 import com.tablebookingservice.user.dto.UserDto;
@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto memberDetail(Long userId) {
         UserEntity user = this.userRepository.findById(userId)
-                .orElseThrow(() -> new MemberException(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
 
         return UserDto.fromEntity(user);
     }

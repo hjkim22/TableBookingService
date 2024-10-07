@@ -1,7 +1,7 @@
 package com.tablebookingservice.manager.service;
 
 import com.tablebookingservice.auth.type.MemberType;
-import com.tablebookingservice.global.exception.MemberException;
+import com.tablebookingservice.global.exception.CustomException;
 import com.tablebookingservice.global.type.ErrorCode;
 import com.tablebookingservice.manager.dto.ManagerDto;
 import com.tablebookingservice.manager.dto.RegisterManagerDto;
@@ -37,7 +37,7 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public ManagerDto memberDetail(Long userId) {
         ManagerEntity manager = this.managerRepository.findById(userId)
-                .orElseThrow(() -> new MemberException(ErrorCode.MANAGER_NOT_FOUND));
+                .orElseThrow(() -> new CustomException(ErrorCode.MANAGER_NOT_FOUND));
 
         return ManagerDto.fromEntity(manager);
     }
