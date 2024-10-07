@@ -1,6 +1,6 @@
 package com.tablebookingservice.user.controller;
 
-import com.tablebookingservice.user.dto.RegisterUser;
+import com.tablebookingservice.user.dto.RegisterUserDto;
 import com.tablebookingservice.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class UserController {
      * @return register 정보
      */
     @PostMapping("/register/user")
-    public ResponseEntity<?> register(@RequestBody RegisterUser request) {
+    public ResponseEntity<?> register(@RequestBody RegisterUserDto request) {
         // 사용자 정보 기반으로 회원가입 후 DTO를 변환하여 응답
         return ResponseEntity
                 .ok()

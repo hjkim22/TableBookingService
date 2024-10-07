@@ -16,13 +16,13 @@ public class UserDto {
     private String password;
     private String phoneNumber;
 
-    public static UserDto fromEntity(UserEntity userEntity) {
+    public static UserDto fromEntity(UserEntity user) {
         return UserDto.builder()
-                .id(userEntity.getId())
-                .username(userEntity.getUsername())
-                .memberType(userEntity.getMemberType())
-                .password(userEntity.getPassword())
-                .phoneNumber(userEntity.getPhoneNumber())
+                .id(user.getId())
+                .username(user.getUsername())
+                .memberType(user.getMemberType())
+                .password(user.getPassword())
+                .phoneNumber(user.getPhoneNumber())
                 .build();
     }
 }
