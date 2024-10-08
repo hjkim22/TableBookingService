@@ -2,7 +2,6 @@ package com.tablebookingservice.user.service;
 
 import com.tablebookingservice.auth.type.MemberType;
 import com.tablebookingservice.global.exception.CustomException;
-import com.tablebookingservice.global.type.ErrorCode;
 import com.tablebookingservice.user.dto.RegisterUserDto;
 import com.tablebookingservice.user.dto.UserDto;
 import com.tablebookingservice.user.entity.UserEntity;
@@ -11,6 +10,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import static com.tablebookingservice.global.type.ErrorCode.USER_NOT_FOUND;
 
 @Service
 @AllArgsConstructor
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto memberDetail(Long userId) {
         UserEntity user = this.userRepository.findById(userId)
-                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_FOUND));
+                .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         return UserDto.fromEntity(user);
     }

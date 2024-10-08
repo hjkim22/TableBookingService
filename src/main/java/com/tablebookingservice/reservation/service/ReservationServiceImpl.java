@@ -1,7 +1,6 @@
 package com.tablebookingservice.reservation.service;
 
 import com.tablebookingservice.global.exception.CustomException;
-import com.tablebookingservice.global.type.ErrorCode;
 import com.tablebookingservice.manager.repository.ManagerRepository;
 import com.tablebookingservice.reservation.dto.CreateReservation;
 import com.tablebookingservice.reservation.dto.ReservationDto;
@@ -10,13 +9,10 @@ import com.tablebookingservice.reservation.dto.UpdateReservation;
 import com.tablebookingservice.reservation.entity.ReservationEntity;
 import com.tablebookingservice.reservation.repository.ReservationRepository;
 import com.tablebookingservice.reservation.type.ReservationStatus;
-import com.tablebookingservice.store.entity.StoreEntity;
-import com.tablebookingservice.store.repository.StoreRepository;
 import com.tablebookingservice.user.entity.UserEntity;
 import com.tablebookingservice.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,7 +32,7 @@ public class ReservationServiceImpl implements ReservationService {
 
     private final ReservationRepository reservationRepository;
     private final ManagerRepository managerRepository;
-    private final StoreRepository storeRepository;
+//    private final StoreRepository storeRepository;
     private final UserRepository userRepository;
 
     @Override
