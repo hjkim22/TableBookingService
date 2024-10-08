@@ -33,7 +33,7 @@ public class UpdateArrival {
         private ReservationStatus reservationStatus;
         private ArrivalStatus arrivalStatus;
 
-        public static Response of(ReservationDto reservationDto) {
+        public static Response fromReservationDto(ReservationDto reservationDto) {
             return Response.builder()
                     .reservationId(reservationDto.getReservationId())
                     .username(reservationDto.getUsername())

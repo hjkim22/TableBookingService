@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public class SearchReservation {
     private List<ReservationDto> reservations;
 
-    public static SearchReservation of(List<ReservationEntity> reservations) {
+    public static SearchReservation fromReservationDto(List<ReservationEntity> reservations) {
         return new SearchReservation(reservations.stream()
                 .map(ReservationDto::fromEntity)
                 .collect(Collectors.toList()));

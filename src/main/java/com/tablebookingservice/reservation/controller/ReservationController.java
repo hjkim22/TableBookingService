@@ -28,7 +28,7 @@ public class ReservationController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public CreateReservation.Response createReservation(
             @RequestBody CreateReservation.Request request) {
-        return CreateReservation.Response.of(reservationService.createReservation(request));
+        return CreateReservation.Response.fromReservationDto(reservationService.createReservation(request));
     }
 
     /**
@@ -43,7 +43,7 @@ public class ReservationController {
             @PathVariable Long id,
             @RequestBody UpdateReservation.Request request) {
 
-        return UpdateReservation.Response.of(reservationService.updateReservation(id, request));
+        return UpdateReservation.Response.fromReservationDto(reservationService.updateReservation(id, request));
     }
 
     /**
@@ -54,7 +54,7 @@ public class ReservationController {
     @GetMapping("/manager/reservation-list/{id}")
     @PreAuthorize("hasRole('ROLE_MANAGER')")
     public SearchReservation getReservationList(@PathVariable Long id) {
-        return SearchReservation.of(reservationService.searchReservation(id));
+        return SearchReservation.fromReservationDto(reservationService.searchReservation(id));
     }
 
     /**
@@ -69,7 +69,7 @@ public class ReservationController {
             @PathVariable Long id,
             @RequestBody UpdateArrival.Request request) {
 
-        return UpdateArrival.Response.of(reservationService.updateArrival(id, request));
+        return UpdateArrival.Response.fromReservationDto(reservationService.updateArrival(id, request));
     }
 
     /**

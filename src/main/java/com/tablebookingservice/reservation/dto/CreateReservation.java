@@ -41,7 +41,7 @@ public class CreateReservation {
         private LocalDate reservationDate;
         private LocalTime reservationTime;
 
-        public static Response of(ReservationDto reservation) {
+        public static Response fromReservationDto(ReservationDto reservation) {
             return Response.builder()
                     .username(reservation.getUsername())
                     .userPhoneNumber(reservation.getUserPhoneNumber())

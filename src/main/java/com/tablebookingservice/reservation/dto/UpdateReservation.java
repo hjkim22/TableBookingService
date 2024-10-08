@@ -32,7 +32,7 @@ public class UpdateReservation {
         private LocalDate reservationDate;
         private LocalTime reservationTime;
 
-        public static Response of(ReservationDto reservation) {
+        public static Response fromReservationDto(ReservationDto reservation) {
             return Response.builder()
                     .reservationId(reservation.getReservationId())
                     .username(reservation.getUsername())
