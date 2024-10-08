@@ -13,7 +13,7 @@ public class RegisterUserDto {
     private String password;
     private String phoneNumber;
 
-    public RegisterUserDto fromUserDto(UserDto user) {
+    public static RegisterUserDto fromUserDto(UserDto user) {
         return RegisterUserDto.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())
