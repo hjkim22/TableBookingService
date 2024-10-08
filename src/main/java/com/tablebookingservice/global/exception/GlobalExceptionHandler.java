@@ -11,12 +11,12 @@ import static com.tablebookingservice.global.type.ErrorCode.INTERNAL_SERVER_ERRO
 import static com.tablebookingservice.global.type.ErrorCode.INVALID_REQUEST;
 
 @Slf4j
-@RestControllerAdvice // 모든 컨트롤러에 대해 전역 예외 처리기를 정의
+@RestControllerAdvice // 모든 컨트롤러에서 발생하는 예외 처리
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
     public ErrorResponseDto customExceptionHandler(CustomException e) {
-        log.error("{} is occurred.", e.getErrorCode());
+        log.error("{} 오류가 발생했습니다.", e.getErrorCode());
 
         return new ErrorResponseDto(e.getErrorCode(), e.getErrorMessage());
     }
@@ -24,21 +24,21 @@ public class GlobalExceptionHandler {
     // 데이터 무결성 위반 예외 처리
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ErrorResponseDto dataIntegrityViolationExceptionHandler(DataIntegrityViolationException e) {
-        log.error("DataIntegrityViolationException is occurred.", e);
+        log.error("데이터 무결성 위반 오류가 발생했습니다.", e);
         return new ErrorResponseDto(INVALID_REQUEST, INVALID_REQUEST.getDescription());
     }
 
     // 사용자 이름을 찾을 수 없는 예외 처리
     @ExceptionHandler(UsernameNotFoundException.class)
     public ErrorResponseDto usernameNotFoundExceptionHandler(UsernameNotFoundException e) {
-        log.error("UsernameNotFoundException is occurred.", e);
+        log.error("사용자를 찾을 수 없는 오류가 발생했습니다.", e);
         return new ErrorResponseDto(INVALID_REQUEST, INVALID_REQUEST.getDescription());
     }
 
     // 모든 예외 처리
     @ExceptionHandler(Exception.class)
     public ErrorResponseDto exceptionHandler(Exception e) {
-        log.error("Exception is occurred.", e);
+        log.error("예외가 발생했습니다.", e);
         return new ErrorResponseDto(INTERNAL_SERVER_ERROR,
                 INTERNAL_SERVER_ERROR.getDescription());
     }
