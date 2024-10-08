@@ -17,10 +17,11 @@ public class CreateReservation {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Request {
-        @NotNull
+
+        @NotNull(message = "사용자 ID는 필수입니다.") // 유효성 검사 메시지 추가
         private Long userId;
 
-        @NotNull
+        @NotNull(message = "매장 ID는 필수입니다.") // 유효성 검사 메시지 추가
         private Long storeId;
 
         private LocalDate reservationDate;

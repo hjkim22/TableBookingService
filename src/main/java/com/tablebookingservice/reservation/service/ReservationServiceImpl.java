@@ -1,7 +1,6 @@
 package com.tablebookingservice.reservation.service;
 
 import com.tablebookingservice.global.exception.CustomException;
-import com.tablebookingservice.manager.repository.ManagerRepository;
 import com.tablebookingservice.reservation.dto.CreateReservation;
 import com.tablebookingservice.reservation.dto.ReservationDto;
 import com.tablebookingservice.reservation.dto.UpdateArrival;
@@ -9,6 +8,8 @@ import com.tablebookingservice.reservation.dto.UpdateReservation;
 import com.tablebookingservice.reservation.entity.ReservationEntity;
 import com.tablebookingservice.reservation.repository.ReservationRepository;
 import com.tablebookingservice.reservation.type.ReservationStatus;
+import com.tablebookingservice.store.entity.StoreEntity;
+import com.tablebookingservice.store.repository.StoreRepository;
 import com.tablebookingservice.user.entity.UserEntity;
 import com.tablebookingservice.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,26 +30,26 @@ import static com.tablebookingservice.reservation.type.ReservationStatus.*;
 @Service
 @RequiredArgsConstructor
 public class ReservationServiceImpl implements ReservationService {
-
     private final ReservationRepository reservationRepository;
-    private final ManagerRepository managerRepository;
-//    private final StoreRepository storeRepository;
-    private final UserRepository userRepository;
+    private final StoreRepository storeRepository;
+    private final UserRepository customerRepository;
 
     @Override
     @Transactional
     public ReservationDto createReservation(CreateReservation.Request request) {
         log.info("예약 등록 시작: {}", request.toString());
 
-//        StoreEntity store = this.storeRepository.findById(request.getStoreId())
-//                .orElseThrow(() -> new CustomException(STORE_NOT_FOUND));
+        // 매장 / 사용자 조회
+        StoreEntity store = this.storeRepository.findById(request.getStoreId())
+                .orElseThrow(() -> new CustomException(STORE_NOT_FOUND));
 
-        UserEntity user = this.userRepository.findById(request.getUserId())
+        UserEntity user = this.customerRepository.findById(request.getUserId())
                 .orElseThrow(() -> new CustomException(USER_NOT_FOUND));
 
         LocalDateTime reserveTime = LocalDateTime.of(
                 request.getReservationDate(), request.getReservationTime());
 
+        // 예약 시간 중복 체크
         boolean exists = this.reservationRepository.existReservationTime(reserveTime);
         if (exists) {
             log.info(ALREADY_RESERVED.getDescription());
@@ -57,7 +58,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         ReservationEntity reservation = this.reservationRepository.save(ReservationEntity.builder()
                 .user(user)
-//                .store(store)
+                .store(store)
                 .reservationStatus(STANDBY)
                 .arrivalStatus(READY)
                 .reservationDate(request.getReservationDate())
@@ -86,7 +87,8 @@ public class ReservationServiceImpl implements ReservationService {
         log.info("예약 승인 여부 변경 완료");
 
         return ReservationDto.fromEntity(
-                this.reservationRepository.save(reservation));
+                // this. 제거 / save 호출을 직접 한 것으로 변경
+                reservationRepository.save(reservation));
     }
 
     @Override
@@ -119,7 +121,8 @@ public class ReservationServiceImpl implements ReservationService {
         log.info("예약자 도착 여부 변경 완료");
 
         return ReservationDto.fromEntity(
-                this.reservationRepository.save(reservation));
+                // this. 제거 / save 호출을 직접 한 것으로 변경
+                reservationRepository.save(reservation));
     }
 
     @Override
@@ -134,21 +137,21 @@ public class ReservationServiceImpl implements ReservationService {
         log.info("예약 상태 취소 완료");
 
         return ReservationDto.fromEntity(
-                this.reservationRepository.save(reservation));
+                // this. 제거 / save 호출을 직접 한 것으로 변경
+                reservationRepository.save(reservation));
     }
 
-    /**
-     * 예약 관련 유효성 검사
-     * 1. 예약 상태가 승인(approval) 확인
-     * 2. 예약 시간이 지났을 경우
-     * 3. 예약 10분 전 도착 확인
-     */
     private void validationReservation(ReservationEntity reservation, LocalTime arrivalTime) {
+        // 예약 상태 유효성 검사
         if (!reservation.getReservationStatus().equals(ReservationStatus.APPROVAL)) {
             throw new CustomException(RESERVATION_STATUS_CHECK_ERROR);
-        } else if (arrivalTime.isAfter(reservation.getReservationTime())) {
+        }
+        // 도착 시간 유효성 검사
+        else if (arrivalTime.isAfter(reservation.getReservationTime())) {
             throw new CustomException(RESERVATION_TIME_EXCEEDED);
-        } else if (arrivalTime.isBefore(reservation.getReservationTime().minusMinutes(10L))) {
+        }
+        // 도착 시간 10분 전 확인
+        else if (arrivalTime.isBefore(reservation.getReservationTime().minusMinutes(10L))) {
             throw new CustomException(CHECK_IT_10_MINUTES_BEFORE_THE_RESERVATION_TIME);
         }
     }

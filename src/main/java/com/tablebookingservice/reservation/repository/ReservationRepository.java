@@ -24,7 +24,7 @@ public interface ReservationRepository extends JpaRepository<ReservationEntity, 
     /**
      * 매장 예약 정보 확인
      * @param id: 매니저 아이디
-     * @return ReservationList
+     * @return 해당 매니저의 모든 예약 리스트
      */
     @Query(" SELECT r FROM ReservationEntity r " +
             " WHERE r.store.manager.id = :id " +
