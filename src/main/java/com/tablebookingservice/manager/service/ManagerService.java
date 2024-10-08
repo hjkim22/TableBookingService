@@ -6,5 +6,5 @@ import com.tablebookingservice.manager.dto.RegisterManagerDto;
 public interface ManagerService {
 
     ManagerDto register(RegisterManagerDto registerManagerDto);
-    ManagerDto memberDetail(Long userId)
+    ManagerDto memberDetail(Long userId);
 }

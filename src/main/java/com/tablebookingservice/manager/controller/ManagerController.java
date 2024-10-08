@@ -1,5 +1,6 @@
 package com.tablebookingservice.manager.controller;
 
+import com.tablebookingservice.manager.dto.ManagerDto;
 import com.tablebookingservice.manager.dto.RegisterManagerDto;
 import com.tablebookingservice.manager.service.ManagerService;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +17,15 @@ public class ManagerController {
 
     /**
      * 회원 가입
-     * @param request : 회원 가입
+     * @param request : 회원 가입 요청 데이터
      * @return register 정보
      */
     @PostMapping("/register/manager")
-    public ResponseEntity<?> register(@RequestBody RegisterManagerDto request) {
-        return ResponseEntity.ok().body(
-                request.from(this.managerService.register(request)));
+    public ResponseEntity<ManagerDto> register(@RequestBody RegisterManagerDto request) {
+//        return ResponseEntity.ok().body(
+//                request.from(this.managerService.register(request)));
+        ManagerDto managerDto = this.managerService.register(request);
+        return ResponseEntity.ok(managerDto); // 구체적인 타입으로 응답
     }
 
     /**
@@ -30,8 +33,8 @@ public class ManagerController {
      * @param id 사용자 아이디
      * @return 사용자 정보
      */
-    @GetMapping("/partner/info")
-    @PreAuthorize("hasRole('ROLE_MANAGER')")
+    @GetMapping("/manager/info")
+    @PreAuthorize("hasRole('ROLE_MANAGER')") // 매니저 권한 체크
     public ResponseEntity<?> getManagerInfo(@RequestParam("id") Long id) {
         return ResponseEntity.ok(this.managerService.memberDetail(id));
     }

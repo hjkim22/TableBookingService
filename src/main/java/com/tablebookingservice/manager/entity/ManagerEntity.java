@@ -18,6 +18,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+// Security UserDetails 인터페이스 구현 -> 보안 관련 정보 제공
 public class ManagerEntity extends GlobalEntity implements UserDetails {
 
     @Id
@@ -45,21 +46,21 @@ public class ManagerEntity extends GlobalEntity implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return true; // 정상 상태 반환
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return true; // 정상 상태 반환
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return true; // 정상 상태 반환
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return true; // 정상 상태 반환
     }
 }

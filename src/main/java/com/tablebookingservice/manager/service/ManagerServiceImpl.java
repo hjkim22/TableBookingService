@@ -22,6 +22,7 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     @Transactional
     public ManagerDto register(RegisterManagerDto manager) {
+        // 비밀번호 인코딩 후 저장
         manager.setPassword(this.passwordEncoder.encode(manager.getPassword()));
 
         ManagerEntity savedManager = this.managerRepository.save(ManagerEntity.builder()
