@@ -1,6 +1,7 @@
 package com.tablebookingservice.store.repository;
 
 import com.tablebookingservice.store.entity.StoreEntity;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,9 +12,14 @@ import java.util.Optional;
 
 @Repository
 public interface StoreRepository extends JpaRepository<StoreEntity, Long> {
+
+    @Cacheable("storeExistsCache") // 캐시 저장
     boolean existsByStoreName(String name);
+
+    @Cacheable("storeCache")
     Optional<StoreEntity> findByStoreName(String storeName);
 
-    @Query(" select s from StoreEntity s " + "where s.manager.id = :managerId")
+    @Cacheable("managerStoresCache")
+    @Query("select s from StoreEntity s where s.manager.id = :managerId")
     List<StoreEntity> findStoreByManagerId(@Param("managerId") Long managerId);
 }

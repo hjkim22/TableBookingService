@@ -12,7 +12,7 @@ public class RegisterManagerDto {
     private String password;
     private String phoneNumber;
 
-    public RegisterManagerDto from(ManagerDto managerDto) {
+    public RegisterManagerDto of(ManagerDto managerDto) {
         return RegisterManagerDto.builder()
                 .username(managerDto.getUsername())
                 .password(managerDto.getPassword())
