@@ -1,6 +1,6 @@
 package com.tablebookingservice.manager.entity;
 
-import com.tablebookingservice.auth.type.MemberType;
+import com.tablebookingservice.global.type.MemberType;
 import com.tablebookingservice.global.entity.GlobalEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
