@@ -1,4 +1,4 @@
-package com.tablebookingservice.global.type;
+package com.tablebookingservice.auth.type;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
