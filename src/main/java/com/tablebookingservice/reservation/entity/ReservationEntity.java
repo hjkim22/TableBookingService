@@ -26,11 +26,11 @@ public class ReservationEntity extends GlobalEntity {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "store_id")
+    @JoinColumn(name = "storeId")
     private StoreEntity store;
 
     @Enumerated(EnumType.STRING)

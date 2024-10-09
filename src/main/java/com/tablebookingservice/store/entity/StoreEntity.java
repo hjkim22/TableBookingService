@@ -20,11 +20,11 @@ public class StoreEntity extends GlobalEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "store_id")
+    @Column(name = "storeId")
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "manager_id")
+    @JoinColumn(name = "managerId")
     private ManagerEntity manager;
 
     private String storeName;

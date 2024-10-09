@@ -33,14 +33,14 @@ public class ReviewEntity extends GlobalEntity {
     private int rating;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "userId", nullable = false)
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "store_id", nullable = false)
+    @JoinColumn(name = "storeId", nullable = false)
     private StoreEntity store;
 
     @ManyToOne
-    @JoinColumn(name = "reservation_id", nullable = false)
+    @JoinColumn(name = "reservationId", nullable = false)
     private ReservationEntity reservation;
 }

@@ -121,7 +121,6 @@ public class ReservationServiceImpl implements ReservationService {
         log.info("예약자 도착 여부 변경 완료");
 
         return ReservationDto.fromEntity(
-                // this. 제거 / save 호출을 직접 한 것으로 변경
                 reservationRepository.save(reservation));
     }
 
@@ -137,7 +136,6 @@ public class ReservationServiceImpl implements ReservationService {
         log.info("예약 상태 취소 완료");
 
         return ReservationDto.fromEntity(
-                // this. 제거 / save 호출을 직접 한 것으로 변경
                 reservationRepository.save(reservation));
     }
 
