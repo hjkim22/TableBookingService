@@ -11,7 +11,7 @@ spring:
     properties:
       hibernate:
         show-sql: true
-#    dialect: org.hibernate.dialect.MariaDBDialect  # Hibernate Dialect
+      dialect: org.hibernate.dialect.MariaDBDialect  # Hibernate Dialect
   h2:
     console:
       enabled: true

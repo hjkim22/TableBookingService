@@ -1,6 +1,6 @@
 package com.tablebookingservice.manager.service;
 
-import com.tablebookingservice.auth.type.MemberType;
+import com.tablebookingservice.auth.MemberType;
 import com.tablebookingservice.global.exception.CustomException;
 import com.tablebookingservice.global.type.ErrorCode;
 import com.tablebookingservice.manager.dto.ManagerDto;

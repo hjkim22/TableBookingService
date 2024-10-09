@@ -1,6 +1,6 @@
 package com.tablebookingservice.user.dto;
 
-import com.tablebookingservice.auth.type.MemberType;
+import com.tablebookingservice.auth.MemberType;
 import com.tablebookingservice.user.entity.UserEntity;
 import lombok.*;
 
