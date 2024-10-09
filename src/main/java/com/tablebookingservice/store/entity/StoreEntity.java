@@ -3,6 +3,7 @@ package com.tablebookingservice.store.entity;
 import com.tablebookingservice.global.entity.GlobalEntity;
 import com.tablebookingservice.manager.entity.ManagerEntity;
 import com.tablebookingservice.reservation.entity.ReservationEntity;
+import com.tablebookingservice.review.entity.ReviewEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -35,10 +36,9 @@ public class StoreEntity extends GlobalEntity {
     @OneToMany(mappedBy = "store", fetch = FetchType.LAZY, orphanRemoval = true)
     private List<ReservationEntity> reservationList = new ArrayList<>();
 
-    // TODO
-//    @Builder.Default
-//    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY, orphanRemoval = true)
-//    private List<Review> reviewList = new ArrayList<>();
+    @Builder.Default
+    @OneToMany(mappedBy = "store", fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<ReviewEntity> reviewList = new ArrayList<>();
 
     /*
         @Builder.Default
