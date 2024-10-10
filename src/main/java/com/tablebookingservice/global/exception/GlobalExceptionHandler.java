@@ -11,7 +11,7 @@ import static com.tablebookingservice.global.type.ErrorCode.INTERNAL_SERVER_ERRO
 import static com.tablebookingservice.global.type.ErrorCode.INVALID_REQUEST;
 
 @Slf4j
-@RestControllerAdvice // 모든 컨트롤러에서 발생하는 예외 처리
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomException.class)

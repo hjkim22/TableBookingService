@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-/**
- * 애플리케이션 전반에서 사용되는 오류 코드
- */
 @Getter
 @AllArgsConstructor
 public enum ErrorCode {
